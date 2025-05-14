@@ -15,9 +15,9 @@ typedef struct {
 } Str;
 
 typedef struct {
-  char *buffer;
-  int   cap;
-  int   len;
+  char         *buffer;
+  unsigned int  cap;
+  unsigned int  len;
 } StringBuilder;
 
 Str str_new(char *str);
@@ -30,7 +30,7 @@ int str_to_i32(Str str);
 long int str_to_i64(Str str);
 unsigned int str_to_u32(Str str);
 unsigned long int str_to_u64(Str str);
-unsigned int str_hash(Str str);
+unsigned long int str_hash(Str str);
 
 Str sb_to_str(StringBuilder sb);
 void sb_push(StringBuilder *sb, char *str);
@@ -54,7 +54,7 @@ bool str_eq(Str a, Str b) {
   if (a.len != b.len)
     return false;
 
-  for (int i = 0; i < a.len; ++i)
+  for (int i = 0; i < (int) a.len; ++i)
     if (a.ptr[i] != b.ptr[i])
       return false;
 
@@ -62,7 +62,7 @@ bool str_eq(Str a, Str b) {
 }
 
 void str_fprint(FILE *stream, Str str) {
-  for (int i = 0; i < str.len; ++i)
+  for (int i = 0; i < (int) str.len; ++i)
     putc(str.ptr[i], stream);
 }
 
@@ -95,7 +95,7 @@ long int str_to_i64(Str str) {
     --str.len;
   }
 
-  for (int i = 0; i < str.len; ++i) {
+  for (int i = 0; i < (int) str.len; ++i) {
     num *= 10;
     num += str.ptr[i] - '0';
   }
@@ -112,7 +112,7 @@ unsigned int str_to_u32(Str str) {
 unsigned long int str_to_u64(Str str) {
   unsigned long int num = 0;
 
-  for (int i = 0; i < str.len; ++i) {
+  for (int i = 0; i < (int) str.len; ++i) {
     num *= 10;
     num += str.ptr[i] - '0';
   }
@@ -189,9 +189,9 @@ void sb_push_u32(StringBuilder *sb, unsigned int num) {
   sb_push_u64(sb, num);
 }
 
-void sb_push_u64(StringBuilder *sb, unsigned long num) {
+void sb_push_u64(StringBuilder *sb, unsigned long int num) {
   unsigned long int _num = num;
-  unsgined int len = 1;
+  unsigned int len = 1;
 
   while (_num >= 10) {
     _num /= 10;
