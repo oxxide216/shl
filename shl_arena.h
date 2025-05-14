@@ -1,3 +1,6 @@
+#ifndef SHL_ARENA_H
+#define SHL_ARENA_H
+
 void *aalloc(unsigned int amount);
 
 #ifdef SHL_ARENA_IMPLEMENTATION
@@ -53,3 +56,5 @@ void *aalloc(unsigned int amount) {
 }
 
 #endif // SHL_ARENA_IMPLEMENTATION
+
+#endif // SHL_ARENA_H

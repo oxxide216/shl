@@ -1,4 +1,8 @@
+#ifndef SHL_STR_H
+#define SHL_STR_H
+
 #include <stdio.h>
+#include <stdbool.h>
 
 #define STR(ptr, len) ((Str) { ptr, len })
 #define STR_LIT(ptr) ((Str) { ptr, sizeof(ptr) - 1 })
@@ -200,3 +204,5 @@ void sb_push_u64(StringBuilder *sb, unsigned long num) {
 }
 
 #endif // SHL_STR_IMPLEMENTATION
+
+#endif // SHL_STR_H
