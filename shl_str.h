@@ -45,6 +45,8 @@ void sb_push_u16(StringBuilder *sb, unsigned short int num);
 void sb_push_u32(StringBuilder *sb, unsigned int num);
 void sb_push_u64(StringBuilder *sb, unsigned long int num);
 
+#endif // SHL_STR_H
+
 #ifdef SHL_STR_IMPLEMENTATION
 
 #include <string.h>
@@ -229,5 +231,3 @@ void sb_push_u64(StringBuilder *sb, unsigned long int num) {
 }
 
 #endif // SHL_STR_IMPLEMENTATION
-
-#endif // SHL_STR_H
