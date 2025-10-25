@@ -3,6 +3,8 @@
 
 void *aalloc(unsigned int amount);
 
+#endif // SHL_ARENA_H
+
 #ifdef SHL_ARENA_IMPLEMENTATION
 
 #include <stdlib.h>
@@ -54,5 +56,3 @@ void *aalloc(unsigned int amount) {
 }
 
 #endif // SHL_ARENA_IMPLEMENTATION
-
-#endif // SHL_ARENA_H
