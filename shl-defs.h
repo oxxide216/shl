@@ -91,7 +91,19 @@ typedef unsigned int   u32;
 typedef long           i64;
 typedef unsigned long  u64;
 
+_Static_assert (sizeof(i8) == 1, "Wrong i8 type size");
+_Static_assert (sizeof(u8) == 1, "Wrong u8 type size");
+_Static_assert (sizeof(i16) == 2, "Wrong i16 type size");
+_Static_assert (sizeof(u16) == 2, "Wrong u16 type size");
+_Static_assert (sizeof(i32) == 4, "Wrong i32 type size");
+_Static_assert (sizeof(u32) == 4, "Wrong u32 type size");
+_Static_assert (sizeof(i64) == 8, "Wrong i64 type size");
+_Static_assert (sizeof(u64) == 8, "Wrong u64 type size");
+
 typedef float  f32;
 typedef double f64;
+
+_Static_assert (sizeof(f32) == 4, "Wrong f32 type size");
+_Static_assert (sizeof(f64) == 8, "Wrong f64 type size");
 
 #endif // SHL_DEFS_H
