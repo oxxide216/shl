@@ -143,10 +143,6 @@ unsigned long int str_hash(Str str) {
   return result;
 }
 
-float str_to_f32(Str str) {
-  return (float) str_to_f64(str);
-}
-
 double str_to_f64(Str str) {
   double num = 0.0;
   i32 i = 0;
@@ -175,6 +171,10 @@ double str_to_f64(Str str) {
   if (is_neg)
     return -num;
   return num;
+}
+
+float str_to_f32(Str str) {
+  return (float) str_to_f64(str);
 }
 
 void sb_reserve_space(StringBuilder *sb, unsigned int amount) {
@@ -270,10 +270,6 @@ void sb_push_u64(StringBuilder *sb, unsigned long int num) {
   sb->len += len;
 }
 
-void sb_push_f32(StringBuilder *sb, float num) {
-  sb_push_f64(sb, num);
-}
-
 void sb_push_f64(StringBuilder *sb, double num) {
   double _num = num;
   unsigned int len = 1;
@@ -293,6 +289,10 @@ void sb_push_f64(StringBuilder *sb, double num) {
   sb_reserve_space(sb, len);
   snprintf(sb->buffer + sb->len, len + 1, "%f", num);
   sb->len += len;
+}
+
+void sb_push_f32(StringBuilder *sb, float num) {
+  sb_push_f64(sb, num);
 }
 
 #endif // SHL_STR_IMPLEMENTATION
