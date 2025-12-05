@@ -5,7 +5,7 @@
 
 #ifdef NDEBUG
 
-#ifdef __emscripten__
+#ifdef EMSCRIPTEN
 #define PERROR(prefix, ...) fprintf(stderr, prefix "[ERROR] " __VA_ARGS__)
 #define PWARN(prefix, ...) fprintf(stderr, prefix "[WARN] " __VA_ARGS__)
 #define PINFO(prefix, ...) printf(prefix "[INFO] " __VA_ARGS__)
@@ -17,7 +17,7 @@
 
 #else
 
-#ifdef __emscripten__
+#ifdef EMSCRIPTEN
 #define PERROR(prefix, ...)                                           \
   do {                                                                \
     fprintf(stderr, __FILE__ ":%d: ", __LINE__);                      \
