@@ -54,6 +54,16 @@
     }                                                           \
   } while (0)
 
+#define DA_EXTEND(a, b)                                                         \
+  do {                                                                          \
+    if ((a).cap < (a).len + (b).len) {                                          \
+      (a).cap = (a).len + (b).len;                                              \
+      (a).items = SHL_DEFS_DA_REALLOC((a).items, (a).cap * sizeof(*(a).items)); \
+    }                                                                           \
+    memcpy((a).items, (b).items, (b).len * sizeof(*(a).items));                 \
+    (a).len += (b).len;                                                         \
+  } while (0)
+
 #define LL_LEN(ll, type, target) \
   do {                           \
     *target = 0;                 \
