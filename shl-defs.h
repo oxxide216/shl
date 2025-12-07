@@ -60,7 +60,7 @@
       (a).cap = (a).len + (b).len;                                              \
       (a).items = SHL_DEFS_DA_REALLOC((a).items, (a).cap * sizeof(*(a).items)); \
     }                                                                           \
-    memcpy((a).items, (b).items, (b).len * sizeof(*(a).items));                 \
+    memcpy((a).items + (a).len, (b).items, (b).len * sizeof(*(a).items));       \
     (a).len += (b).len;                                                         \
   } while (0)
 
