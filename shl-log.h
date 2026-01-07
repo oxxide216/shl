@@ -95,8 +95,8 @@
   } while (0)
 #define PWARN(prefix, ...)                                              \
   do {                                                                  \
-    fprintf(stderr, __FILE__ ":%d:  ", __LINE__);                       \
-    fprintf(stderr, prefix ": \033[33;1m[WARN]\033[0m " __VA_ARGS__);   \
+    fprintf(stderr, __FILE__ ":%d: ", __LINE__);                       \
+    fprintf(stderr, prefix "\033[33;1m[WARN]\033[0m " __VA_ARGS__);   \
   } while (0)
 #define PINFO(prefix, ...)                              \
   do {                                                  \
