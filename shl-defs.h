@@ -39,6 +39,9 @@
         (da).items = SHL_DEFS_DA_ALLOC(sizeof(element));                          \
       }                                                                           \
     }                                                                             \
+    memmove((da).items + (index) + 1,                                             \
+            (da).items + (index),                                                 \
+            ((da).len - (index)) * sizeof(element));                              \
     (da).items[index] = element;                                                  \
     ++(da).len;                                                                   \
   } while (0)
