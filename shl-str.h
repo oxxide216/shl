@@ -274,6 +274,11 @@ void sb_push_f64(StringBuilder *sb, double num) {
   double _num = num;
   unsigned int len = 1;
 
+  if (_num < 0.0) {
+    _num *= -1.0;
+    ++len;
+  }
+
   while (_num >= 10.0) {
     _num /= 10.0;
     ++len;
