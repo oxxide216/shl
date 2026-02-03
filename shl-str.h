@@ -239,9 +239,9 @@ void sb_push_i64(StringBuilder *sb, long int num) {
     ++len;
   }
 
-  sb_reserve_space(sb, len);
-  snprintf(sb->buffer + sb->len, len, "%ld", num);
-  sb->len += len;
+  sb_reserve_space(sb, len + 1);
+  snprintf(sb->buffer + sb->len, len + 1, "%ld", num);
+  sb->len += len + 1;
 }
 
 void sb_push_u8(StringBuilder *sb, unsigned char num) {
@@ -266,8 +266,8 @@ void sb_push_u64(StringBuilder *sb, unsigned long int num) {
   }
 
   sb_reserve_space(sb, len);
-  snprintf(sb->buffer + sb->len, len, "%lu", num);
-  sb->len += len;
+  snprintf(sb->buffer + sb->len, len + 1, "%lu", num);
+  sb->len += len + 1;
 }
 
 void sb_push_f64(StringBuilder *sb, double num) {
@@ -291,9 +291,9 @@ void sb_push_f64(StringBuilder *sb, double num) {
     ++len;
   }
 
-  sb_reserve_space(sb, len);
-  snprintf(sb->buffer + sb->len, len, "%f", num);
-  sb->len += len;
+  sb_reserve_space(sb, len + 1);
+  snprintf(sb->buffer + sb->len, len + 1, "%f", num);
+  sb->len += len + 1;
 }
 
 void sb_push_f32(StringBuilder *sb, float num) {
