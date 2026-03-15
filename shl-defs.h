@@ -48,13 +48,13 @@
 
 #define DA_REMOVE(da) (da).items[--(da).len]
 
-#define DA_REMOVE_AT(da, index)                                 \
-  do {                                                          \
-    if ((index) < (da).len + 1) {                               \
-        memmove((da).items + (index), (da).items + (index) + 1, \
-                sizeof(*(da).items) * (da).len);                \
-      --(da).len;                                               \
-    }                                                           \
+#define DA_REMOVE_AT(da, index)                                  \
+  do {                                                           \
+    if ((index) < (da).len) {                                    \
+        memmove((da).items + (index), (da).items + (index) + 1,  \
+                sizeof(*(da).items) * ((da).len - (index) - 1)); \
+      --(da).len;                                                \
+    }                                                            \
   } while (0)
 
 #define DA_EXTEND(a, b)                                                           \
