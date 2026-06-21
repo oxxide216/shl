@@ -1,8 +1,9 @@
 #ifndef SHL_STR_H
 #define SHL_STR_H
 
+#ifndef SHL_STR_NO_STD
 #include <stdio.h>
-#include <stdbool.h>
+#endif
 
 #define STR(ptr, len) ((Str) { ptr, len })
 #define STR_LIT(ptr) ((Str) { ptr, sizeof(ptr) - 1 })
@@ -21,11 +22,13 @@ typedef struct {
 } StringBuilder;
 
 Str str_new(char *str);
-bool str_eq(Str a, Str b);
+int str_eq(Str a, Str b);
+#ifndef SHL_STR_NO_STD
 void str_fprint(FILE *stream, Str str);
 void str_fprintln(FILE *stream, Str str);
 void str_print(Str str);
 void str_println(Str str);
+#endif
 int str_to_i32(Str str);
 long int str_to_i64(Str str);
 unsigned int str_to_u32(Str str);
@@ -35,6 +38,7 @@ unsigned long int str_hash(Str str);
 float str_to_f32(Str str);
 double str_to_f64(Str str);
 
+#ifndef SHL_STR_NO_STD
 Str sb_to_str(StringBuilder sb);
 void sb_push(StringBuilder *sb, char *str);
 void sb_push_char(StringBuilder *sb, char ch);
@@ -50,29 +54,39 @@ void sb_push_u64(StringBuilder *sb, unsigned long int num);
 
 void sb_push_f32(StringBuilder *sb, float num);
 void sb_push_f64(StringBuilder *sb, double num);
+#endif
 
 #endif // SHL_STR_H
 
 #ifdef SHL_STR_IMPLEMENTATION
 
+#ifndef SHL_STR_NO_STD
 #include <string.h>
 #include <stdlib.h>
+#endif
 
 Str str_new(char *str) {
-  return (Str) { .ptr = str, .len = strlen(str) };
+  unsigned int len = 0;
+
+  char *_str = str;
+  while (*_str++)
+    ++len;
+
+  return (Str) { .ptr = str, .len = len };
 }
 
-bool str_eq(Str a, Str b) {
+int str_eq(Str a, Str b) {
   if (a.len != b.len)
-    return false;
+    return 0;
 
   for (int i = 0; i < (int) a.len; ++i)
     if (a.ptr[i] != b.ptr[i])
-      return false;
+      return 0;
 
-  return true;
+  return 1;
 }
 
+#ifndef SHL_STR_NO_STD
 void str_fprint(FILE *stream, Str str) {
   for (int i = 0; i < (int) str.len; ++i)
     putc(str.ptr[i], stream);
@@ -90,6 +104,7 @@ void str_print(Str str) {
 void str_println(Str str) {
   str_fprintln(stdout, str);
 }
+#endif
 
 int str_to_i32(Str str) {
   return (int) str_to_i64(str);
@@ -101,7 +116,7 @@ long int str_to_i64(Str str) {
   if (str.len == 0)
     return 0;
 
-  bool is_neg = str.ptr[0] == '-';
+  int is_neg = str.ptr[0] == '-';
   if (is_neg) {
     ++str.ptr;
     --str.len;
@@ -147,7 +162,7 @@ double str_to_f64(Str str) {
   double num = 0.0;
   int i = 0;
 
-  bool is_neg = str.ptr[0] == '-';
+  int is_neg = str.ptr[0] == '-';
   if (is_neg) {
     ++str.ptr;
     --str.len;
@@ -177,6 +192,7 @@ float str_to_f32(Str str) {
   return (float) str_to_f64(str);
 }
 
+#ifndef SHL_STR_NO_STD
 void sb_reserve_space(StringBuilder *sb, unsigned int amount) {
   if (amount > sb->cap - sb->len) {
     if (sb->cap != 0) {
@@ -299,5 +315,6 @@ void sb_push_f64(StringBuilder *sb, double num) {
 void sb_push_f32(StringBuilder *sb, float num) {
   sb_push_f64(sb, num);
 }
+#endif
 
 #endif // SHL_STR_IMPLEMENTATION
