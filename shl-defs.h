@@ -118,8 +118,10 @@ typedef short          i16;
 typedef unsigned short u16;
 typedef int            i32;
 typedef unsigned int   u32;
+#ifndef __wasm__
 typedef long           i64;
 typedef unsigned long  u64;
+#endif
 
 _Static_assert (sizeof(i8) == 1, "Wrong i8 type size");
 _Static_assert (sizeof(u8) == 1, "Wrong u8 type size");
@@ -127,8 +129,10 @@ _Static_assert (sizeof(i16) == 2, "Wrong i16 type size");
 _Static_assert (sizeof(u16) == 2, "Wrong u16 type size");
 _Static_assert (sizeof(i32) == 4, "Wrong i32 type size");
 _Static_assert (sizeof(u32) == 4, "Wrong u32 type size");
+#ifndef __wasm__
 _Static_assert (sizeof(i64) == 8, "Wrong i64 type size");
 _Static_assert (sizeof(u64) == 8, "Wrong u64 type size");
+#endif
 
 typedef float  f32;
 typedef double f64;
