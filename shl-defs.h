@@ -1,9 +1,16 @@
 #ifndef SHL_DEFS_H
 #define SHL_DEFS_H
 
+#ifndef SHL_DEFS_NO_STD
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#endif
+
+#ifdef SHL_DEFS_NO_STD
+#define false 0
+#define true  1
+#endif
 
 #ifndef SHL_DEFS_DA_ALLOC
 #define SHL_DEFS_DA_ALLOC malloc
@@ -100,6 +107,10 @@
                                       \
     ll_end = new;                     \
   } while(0)
+
+#ifdef SHL_DEFS_NO_STD
+typedef unsigned char bool;
+#endif
 
 typedef char           i8;
 typedef unsigned char  u8;
