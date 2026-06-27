@@ -112,15 +112,20 @@
 typedef unsigned char bool;
 #endif
 
-typedef char           i8;
-typedef unsigned char  u8;
-typedef short          i16;
-typedef unsigned short u16;
-typedef int            i32;
-typedef unsigned int   u32;
+typedef char               i8;
+typedef unsigned char      u8;
+typedef short              i16;
+typedef unsigned short     u16;
+typedef int                i32;
+typedef unsigned int       u32;
 #ifndef __wasm__
-typedef long           i64;
-typedef unsigned long  u64;
+#ifdef _WIN32
+typedef long long          i64;
+typedef unsigned long long u64;
+#else
+typedef long               i64;
+typedef unsigned long      u64;
+#endif
 #endif
 
 _Static_assert (sizeof(i8) == 1, "Wrong i8 type size");
