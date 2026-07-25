@@ -283,7 +283,7 @@ void sb_push_u64(StringBuilder *sb, unsigned long int num) {
 
   sb_reserve_space(sb, len);
   snprintf(sb->buffer + sb->len, len + 1, "%lu", num);
-  sb->len += len + 1;
+  sb->len += len;
 }
 
 void sb_push_f64(StringBuilder *sb, double num) {
@@ -309,7 +309,7 @@ void sb_push_f64(StringBuilder *sb, double num) {
 
   sb_reserve_space(sb, len + 1);
   snprintf(sb->buffer + sb->len, len + 1, "%f", num);
-  sb->len += len + 1;
+  sb->len += len;
 }
 
 void sb_push_f32(StringBuilder *sb, float num) {
